@@ -10,6 +10,5 @@ include 'HashTable.class.php';
 $ht = new HashTable();
 $ht->insert('key1','value1'); //插入key1 = value1
 $ht->insert('key2','value2'); //插入key2 = value2
-
 echo $ht->find('key1'),PHP_EOL;
 echo $ht->find('key2'),PHP_EOL;
