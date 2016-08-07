@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f58a1a0e-96ab-4df1-b1d2-842d7faf98aa" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hashtable/read.md" />
+    <list default="true" id="f58a1a0e-96ab-4df1-b1d2-842d7faf98aa" name="Default" comment=" add README.md">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hashtable/README.md" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hashtable/read.md" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="learn.iws" />
@@ -54,12 +55,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="read.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/hashtable/read.md">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hashtable/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="0">
-                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <first_editor relative-caret-position="504">
+                <caret line="41" column="61" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="61" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -81,6 +82,8 @@
         <option value="$PROJECT_DIR$/hash/server.php" />
         <option value="$PROJECT_DIR$/hash/index.php" />
         <option value="$PROJECT_DIR$/hashtable/index.php" />
+        <option value="$PROJECT_DIR$/hashtable/read.md" />
+        <option value="$PROJECT_DIR$/hashtable/README.md" />
       </list>
     </option>
   </component>
@@ -97,7 +100,7 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP7" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="1358" />
     <option name="y" value="-8" />
     <option name="width" value="1382" />
     <option name="height" value="744" />
@@ -293,7 +296,7 @@
       <workItem from="1470556480113" duration="796000" />
       <workItem from="1470557686832" duration="1200000" />
       <workItem from="1470569252622" duration="224000" />
-      <workItem from="1470571920389" duration="192000" />
+      <workItem from="1470571920389" duration="1376000" />
     </task>
     <task id="LOCAL-00001" summary="add test">
       <created>1470571948967</created>
@@ -316,11 +319,18 @@
       <option name="project" value="LOCAL" />
       <updated>1470572060327</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="使用PHP实现简单的Hash表">
+      <created>1470572116334</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1470572116334</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8655000" />
+    <option name="totallyTimeSpent" value="9839000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -332,7 +342,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="1358" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1323752" sideWeight="0.4945055" order="0" side_tool="false" content_ui="combo" />
@@ -638,11 +648,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hashtable/read.md">
+    <entry file="file://$PROJECT_DIR$/hashtable/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <first_editor relative-caret-position="504">
+            <caret line="41" column="61" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="61" />
             <folding />
           </first_editor>
           <second_editor />
