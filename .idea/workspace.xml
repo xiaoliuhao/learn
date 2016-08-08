@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f58a1a0e-96ab-4df1-b1d2-842d7faf98aa" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="learn.iws" />
@@ -375,7 +377,7 @@
       <workItem from="1470636657400" duration="3861000" />
       <workItem from="1470641088952" duration="631000" />
       <workItem from="1470641745174" duration="15519000" />
-      <workItem from="1470672003181" duration="296000" />
+      <workItem from="1470672003181" duration="303000" />
     </task>
     <task id="LOCAL-00001" summary="add test">
       <created>1470571948967</created>
@@ -426,11 +428,18 @@
       <option name="project" value="LOCAL" />
       <updated>1470668690691</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="一个小型数据库的实现">
+      <created>1470672306236</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1470672306236</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30290000" />
+    <option name="totallyTimeSpent" value="30297000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
