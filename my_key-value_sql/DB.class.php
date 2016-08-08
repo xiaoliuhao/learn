@@ -127,14 +127,24 @@ class DB{
         return $data;
     }
 
+    /**
+     * insert 把一条记录插入到数据库中
+     * @access public
+     * @param $key  键值
+     * @param $data 相应的数据
+     * @return int
+     */
     public function insert($key, $data) {
+        /**计算出索引记录所在的Hash链表的文件偏移量
+         *通过fast获取到索引文件和数据文件的下一个空闲空间文件偏移量$idxoset和$datoff
+         */
         $offset = ($this->_hash($key) %DB_BUCKET_SIZE) *4;
         $idxoff = fstat($this->idx_fp); // 通过已打开的文件指针取得文件信息(详情参见README.md)
         $idxoff = intval($idxoff['size']);  //intval获取变量的整数值 (取整)
 
         $datoff = fstat($this->dat_fp);
         $datoff = intval($datoff['size']);
-
+        //比较插入的索引记录的$key是否大于限定的最大长度
         $keylen = strlen($key);
         if($keylen > DB_KEY_SIZE) {
             return DB_FAILURE;
@@ -145,20 +155,27 @@ class DB{
          */
         $block = pack('L', 0x00000000); //指向下一条索引记录的指针 此处填充为0 表示已经没有下一条了
         $block .= $key; //键 要插入的key
-        $space = DB_KEY_SIZE - $keylen; //如果key没有达到指定的最大长度,则用字符0作为填充,直到达到键的最大长度为止
+        $space = DB_KEY_SIZE - $keylen; //如果key没有达到指定的最大长度 ↓↓
         for ($i = 0; $i < $space; $i++) {
-            $block .= pack('C', 0x00);
+            $block .= pack('C', 0x00);  //用字符0作为填充,直到达到键的最大长度为止
         }
-        $block .= pack('L', $datoff);
-        $block .= pack('L', strlen($data));
+        $block .= pack('L', $datoff);   //数据记录所在数据文件的偏移量域填充为数据文件的下一个空闲空间的文件偏移量
+        $block .= pack('L', strlen($data));//数据记录的长度域填充为要插入的数据记录的长度
 
+        //把索引文件的文件的偏移量移动到索引记录所在的Hash链表位置上
         fseek($this->idx_fp, $offset, SEEK_SET);
+        //读取Hash链表的开始索引记录的文件偏移量$pos
         $pos = unpack('L', fread($this->idx_fp, 4));
         $pos = $pos[1];
-
+        /**
+         * $pos == 0
+         * 表示此时 Hash 链表为空
+         * 把新的索引记录插入到索引文件的空闲位置上
+         * 并修改Hash链表的开始索引记录的文件偏移量为新插入的索引记录的位置
+         */
         if($pos == 0) {
             fseek($this->idx_fp, $offset, SEEK_SET);
-            fwrite($this->idx_fp, pack('L', $idxoff, 4));
+            fwrite($this->idx_fp, pack('L', $idxoff), 4);
 
             fseek($this->idx_fp, 0, SEEK_END);
             fwrite($this->idx_fp, $block, DB_INDEX_SIZE);
@@ -167,8 +184,16 @@ class DB{
             fwrite($this->dat_fp, $data, strlen($data));
 
             return DB_SUCCESS;
-        }
-
+        } //else:
+        /**
+         * $pos != 0
+         * 表示此时 Hash 链表不为空
+         * 遍历此Hash表,查找Hash链表中是否已经存在要插入的$key
+         *  - 存在: 插入失败
+         *  - 不存在: 把新的缩影记录插入到索引文件的空闲位置上
+         *            并把Hash链表中最后一个索引记录节点的next指针(指向下一个索引记录节点的文件偏移量)
+         *            修改为新插入索引记录的位置,使其成为Hash链表中的最后一个节点
+         */
         $found = false;
         while($pos) {
             fseek($this->idx_fp, $pos, SEEK_SET);
@@ -202,6 +227,50 @@ class DB{
 
     }
 
+    public function delete($key) {
+        $offset = ($this->_hash($key) % DB_BUCKET_SIZE) *4;
+        fseek($this->idx_fp, $offset, SEEK_SET);
 
+        $head = unpack('L', fread($this->idx_fp, 4));
+        $head = $head[1];
+        $curr = $head;
+        $prev = 0;
+        $found = false;
+        while($curr) {
+            fseek($this->idx_fp, $curr, SEEK_SET);
+            $block = fread($this->idx_fp, DB_INDEX_SIZE);
 
+            $next = unpack('L', substr($block, 0, 4));
+            $next = $next[1];
+
+            $cpkey = substr($block, 4, DB_KEY_SIZE);
+            if(!strncmp($key, $cpkey, strlen($key))) {
+                $found = true;
+                break;
+            }
+            $prev = $curr;
+            $curr = $next;
+        }
+
+        if(!$found) {
+            return DB_FAILURE;
+        }
+
+        if($prev == 0) {
+            fseek($this->idx_fp, $offset, SEEK_SET);
+            fwrite($this->idx_fp, pack('L', $next), 4);
+        } else {
+            fseek($this->idx_fp, $prev, SEEK_SET);
+            fwrite($this->idx_fp, pack('L',$next), 4);
+        }
+        return DB_SUCCESS;
+    }
+
+    public function close() {
+        if(!$this->closed) {
+            fclose($this->idx_fp);
+            fclose($this->dat_fp);
+            $this->closed = true;
+        }
+    }
 }

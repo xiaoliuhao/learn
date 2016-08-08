@@ -40,4 +40,10 @@ function __fstat(){
     var_dump($int);
 }
 
-__fstat();
+function __explode(){
+    $start_time = explode(' ',microtime());
+    var_dump($start_time);
+    var_dump(microtime());
+}
+
+__explode();
