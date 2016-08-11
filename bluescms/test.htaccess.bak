@@ -1,0 +1,3 @@
+RewriteEngine on
+RewriteCond $1 !^(ueditor|index\.php|rebots\.txt)
+RewriteRule ^(.*)$ /jisuanji/bluescms/index.php/$1 [L]
